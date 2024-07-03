@@ -1,13 +1,12 @@
 import React from 'react';
 
 
-function Game() {
+function SingUp() {
     return (
         <div>
-            Game Component
+            SingUp Component
         </div>
     );
 }
 
-
-export default Game;
+export default SingUp;
