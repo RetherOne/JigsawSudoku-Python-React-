@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import axios from "axios"
 
 function SingUp() {
     const {
@@ -10,7 +11,16 @@ function SingUp() {
     } = useForm({ mode: 'onChange' })
 
     const onSubmit = (data) => {
-        console.log(data)
+        axios.post('http://127.0.0.1:8000/api/user/',
+            {
+                first_name: data.first_name,
+                last_name: data.last_name,
+                login: data.login,
+                password: data.password,
+                email: data.email,
+                birthday: data.birthday,
+            }
+        )
     }
 
     return (
@@ -66,9 +76,11 @@ function SingUp() {
                     </Form.Text>
                 </Form.Group>
 
-                <input className="input100" type="date" placeholder="Enter birthday"/>
+                    <input className="input100" type="date" placeholder="Enter email"
+                        {...register("birthday")}/>
 
-                <Button type="submit">Sing Un</Button>
+
+                <Button type="submit">Sing Up</Button>
 
             </Form>
         </div>
