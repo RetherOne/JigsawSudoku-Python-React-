@@ -2,12 +2,12 @@ from rest_framework import serializers
 from .models import User
 
 class UserSerializer(serializers.ModelSerializer):
-    # first_name = serializers.CharField(max_length=30)
-    # last_name = serializers.CharField(max_length=30)
-    # login = serializers.CharField(max_length=30)
-    # password = serializers.CharField(max_length=30)
-    # email = serializers.CharField(required=False, max_length=50)
-    # birthday = serializers.DateField()
+    first_name = serializers.CharField(max_length=30)
+    last_name = serializers.CharField(max_length=30)
+    login = serializers.CharField(max_length=30)
+    password = serializers.CharField(max_length=30)
+    email = serializers.EmailField(max_length=50, allow_blank=True)
+    birthday = serializers.DateField()
 
     # def create(self, validated_data):
     #     return User.objects.create(**validated_data)
@@ -24,5 +24,5 @@ class UserSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = User
-        fields = ('__all__')
+        fields = ('first_name', 'last_name', 'login', 'password', 'email', 'birthday')
 

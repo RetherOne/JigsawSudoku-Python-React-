@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+// import {useNavigate} from "react-router-dom";
 import axios from "axios"
 
 function SingUp() {
+    const [loginExist, setLoginExist] = useState("");
+    const [emailExist, setEmailExist] = useState("");
     const {
         register,
         handleSubmit,
@@ -20,7 +23,30 @@ function SingUp() {
                 email: data.email,
                 birthday: data.birthday,
             }
-        )
+        ).catch(function (error) {
+            if (error.response) {
+                console.log(error.response.data);
+                if (error.response.data.data === "email_exist") {
+                    setEmailExist("Email alredy exist!");
+                    console.log(emailExist)
+                }
+                else{
+                    setEmailExist("");
+                }
+                if (error.response.data.data === "login_exist") {
+                    setLoginExist("Login alredy exist!");
+                    console.log(loginExist)
+                }
+                else{
+                    setLoginExist("");
+                }
+            }
+            else{
+                setEmailExist("");
+                setLoginExist("");
+            }
+            
+        })
     }
 
     return (
@@ -44,6 +70,7 @@ function SingUp() {
                         })} />
                     <Form.Text style={{ color: '#ce0000', float: 'right' }}>
                         {errors.last_name?.message}
+
                     </Form.Text>
                 </Form.Group>
                 <Form.Group>
@@ -53,7 +80,8 @@ function SingUp() {
                             required: { value: true, message: "Login is required" }
                         })} />
                     <Form.Text style={{ color: '#ce0000', float: 'right' }}>
-                        {errors.login?.message}
+                        {errors.login?.message || loginExist}
+                        
                     </Form.Text>
                 </Form.Group>
                 <Form.Group>
@@ -67,18 +95,21 @@ function SingUp() {
                     </Form.Text>
                 </Form.Group>
                 <Form.Group>
-                    <input className="input100" type="text" placeholder="Enter email"
-                        {...register("email", {
-                            minLength: { value: 3, message: "Min email is 3 characters" }
-                        })} />
+                    <input className="input100" type="email" placeholder="Enter email"
+                        {...register("email")} />
                     <Form.Text style={{ color: '#ce0000', float: 'right' }}>
-                        {errors.email?.message}
+                        {emailExist}
                     </Form.Text>
                 </Form.Group>
 
-                    <input className="input100" type="date" placeholder="Enter email"
-                        {...register("birthday")}/>
+                    <input className="input100" type="date" placeholder="Enter birthday"
+                        {...register("birthday",{
+                            required: { value: true, message: "Birthday is required" }
+                        })}/>
 
+                    <Form.Text style={{ color: '#ce0000', float: 'right' }}>
+                        {errors.birthday?.message}
+                    </Form.Text>
 
                 <Button type="submit">Sing Up</Button>
 

@@ -6,7 +6,7 @@ class User(models.Model):
     last_name = models.CharField(max_length=30)
     login = models.CharField(max_length=30, unique=True)
     password = models.CharField(max_length=30)
-    email = models.CharField(max_length=50, blank=True, unique=True)
+    email = models.EmailField(max_length=50, null=True, blank=True, unique=True)
     birthday = models.DateField()
     date_registration = models.DateTimeField(auto_now_add=True)
 
