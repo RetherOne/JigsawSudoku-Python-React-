@@ -1,0 +1,26 @@
+html {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+
+.map {
+    display: inline-table;
+}
+
+.box {
+    border: 1px solid #6f6f6f;
+    height: 40px;
+    width: 40px;
+    font-size: 20px;
+    text-align: center;
+    padding: 0;
+    flex-wrap: wrap;
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+}
