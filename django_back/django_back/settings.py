@@ -135,3 +135,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ORIGIN_WHITELIST = [
      'http://localhost:3000'
 ]
+
+# SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+
+# SESSION_COOKIE_HTTPONLY = True

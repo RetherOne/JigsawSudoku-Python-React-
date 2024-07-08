@@ -16,11 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from game.views import GameView
+from game.views import StartGameView, PlayGameView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('authentication.urls')),
-    path('game/', GameView.as_view())
+    path('game/', StartGameView.as_view()),
+    path('game/play', PlayGameView.as_view())
+
 
 ]
